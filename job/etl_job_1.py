@@ -4,7 +4,11 @@ findspark.init()
 import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
- 
+from dotenv import load_dotenv, dotenv_values
+
+load_dotenv()
+input_path = os.getenv("INPUT_PATH")
+output_path = os.getenv("OUTPUT_PATH")
 
 spark = SparkSession.builder.config("spark.driver.memory", "8g").getOrCreate()
 
@@ -41,8 +45,6 @@ def pivot_data(df):
     data = data.fillna(0)
     return data 
 
-input_path = "D:\\Đại Học CNTT\\Data engineer\\DE-COURSE\\Homework\\ETL Pineline\\data\\20220401.json"
-output_path = "D:\\Đại Học CNTT\\Data engineer\\DE-COURSE\\Homework\\ETL Pineline\\output\\day-1"
 
 def main(path):
     print("---------Reading data from source--------------")
@@ -63,5 +65,5 @@ def main(path):
     
     return print("Task finished") 
 
-main(input_path)
+main(env.input_path)
 
